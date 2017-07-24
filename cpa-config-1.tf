@@ -65,6 +65,7 @@ resource "ibm_compute_vm_instance" "computenodes" {
   local_disk = false
   private_network_only = true,
   private_vlan_id = "${data.ibm_network_vlan.private_vlan.id}"
+  private_subnet = "${var.private_subnet}"
   hourly_billing = true,
   tags = ["schematics","compute"]
   user_metadata = <<EOF
