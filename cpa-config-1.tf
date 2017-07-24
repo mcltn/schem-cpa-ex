@@ -1,6 +1,8 @@
 variable softlayer_username {}
 variable softlayer_api_key {}
-variable base_template_image {}
+variable base_template_image {
+  default = ""
+}
 variable datacenter {}
 variable private_vlan {}
 variable private_subnet {}
@@ -37,6 +39,7 @@ resource "ibm_compute_vm_instance" "domaincontroller" {
   local_disk = false
   private_network_only = false,
   private_vlan_id = "${data.ibm_network_vlan.private_vlan.id}"
+  private_subnet = "${var.private_subnet}"
   hourly_billing = true,
   tags = ["schematics","domaincontroller"]
   user_metadata = <<EOF
